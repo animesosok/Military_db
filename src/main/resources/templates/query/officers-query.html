@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Officers</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></head>
+
+</head>
+<body style="padding: 10px">
+<h1>Officers</h1>
+<a href="/" class="btn btn-primary" style="padding: 10px">Main page</a>
+<form class="form"  method="post">
+    <div class="form-group">
+        <label for="unitId">Select unit</label>
+        <select class="form-control" id="unitId" name="unitId">
+            <option value=""></option>
+            <option th:each="unit : ${units}" th:value="${unit.unitId}"
+                    th:text="${#objects.nullSafe(unit?.unitId, '')} + ' '+${#objects.nullSafe(unit?.unitName.unitName, '')} + ' ' +  ${#objects.nullSafe(unit.commander?.lastName,'')} + ' ' + ${#objects.nullSafe(unit.commander?.firstName, '')} + ' ' + ${#objects.nullSafe(unit.commander?.fatherName, '')}"></option>
+        </select>
+    </div>
+    <button  class="btn btn-primary" type="submit">Submit</button>
+</form>
+    <div class="table-responsive" style="padding-top: 10px">
+        <table class = "table table-hover table-bordered">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Person ID</th>
+                <th scope="col">Last name</th>
+                <th scope="col">First name</th>
+                <th scope="col">Father name</th>
+                <th scope="col">Rank</th>
+                <th scope="col">Serve unit ID</th>
+                <th scope="col">Birthday</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="id" th:each="person : ${persons}" >
+                <th scope ="row" th:text="${person.personId}" class="col-first"></th>
+                <td th:text="${person.lastName}"></td>
+                <td th:text="${person.firstName}"></td>
+                <td th:text="${person.fatherName}"></td>
+                <td th:text="${person.rank.rankName}"></td>
+                <td th:text="${person.serveUnitId}"></td>
+                <td th:text="${person.birthday}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

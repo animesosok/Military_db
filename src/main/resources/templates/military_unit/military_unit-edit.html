@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Military Unit Redactor</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></head>
+
+</head>
+<body style="padding: 10px">
+<h1>Military Unit Redactor</h1>
+
+<form method="post">
+  <div class="form-group">
+    <label for="unitNameId">Unit Name ID:</label>
+    <select class="form-control" id="unitNameId" name="unitNameId" >
+      <option  th:value="${unit.unitName.unitNameId}" th:text="${unit.unitName.unitName}"></option>
+      <option th:each="option : ${unitNames}" th:value="${option.unitNameId}" th:text="${option.unitName}"></option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="personId">Commander ID:</label>
+    <select type="submit"  class="form-control" id="personId" name="commanderId">
+      <option  th:value="${unit.commander.personId}" th:text="${#objects.nullSafe(unit.commander.personId, '')} + ' '+${#objects.nullSafe(unit.commander.lastName, '')} + ' ' +  ${#objects.nullSafe(unit.commander.firstName,'')} + ' ' + ${#objects.nullSafe(unit.commander.fatherName, '')} + ' ' + ${#objects.nullSafe(unit.commander.birthday, '')}"></option>
+      <option th:each="option : ${persons}" th:value="${option.personId}"
+              th:text="${#objects.nullSafe(option?.personId, '')} + ' '+${#objects.nullSafe(option?.lastName, '')} + ' ' +  ${#objects.nullSafe(option?.firstName,'')} + ' ' + ${#objects.nullSafe(option?.fatherName, '')} + ' ' + ${#objects.nullSafe(option?.birthday, '')}"></option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="parentUnit">Parent Unit:</label>
+    <select type="submit" class="form-control" id="parentUnit" name="parentUnit">
+      <option  th:value="${unit.parentUnit}" th:text="${unit.parentUnit}">
+      <option value=""></option>
+      <option th:each="option : ${units}" th:value="${option.unitId}"
+              th:text="${#objects.nullSafe(option?.unitId, '')} + ' '+${#objects.nullSafe(option?.unitName.unitName, '')}  + ' ' + ${#objects.nullSafe(option?.commander?.lastName, '')}+ ' ' +  ${#objects.nullSafe(option?.commander?.firstName,'')} + ' ' + ${#objects.nullSafe(option?.commander?.fatherName, '')}"></option>
+    </select>
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+</body>
+</html>

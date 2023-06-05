@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>PersonForm</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></head>
+
+</head>
+<body style="padding: 10px">
+<h1>Military Unit Form</h1>
+
+<form action="/military_unit/insert" method="post">
+  <div class="form-group">
+    <label for="personLastName">Last name:</label>
+    <input class="form-control" id="personLastName" name="personLastName"/>
+  </div>
+  <div class="form-group">
+    <label for="personFirstName">First Name:</label>
+    <input class="form-control" id="personFirstName" name="personFirstName">
+    </input>
+  </div>
+  <div class="form-group">
+    <label for="personFatherName">Father name:</label>
+    <input class="form-control" id="personFatherName" name="personFatherName">
+    </input>
+  </div>
+  <div class="form-group">
+    <label for="rank">Rank:</label>
+    <select class="form-control" id="rank" name="rank">
+      <option th:each="rank : ${ranks}" th:value="${rank.rankId}" th:text="${rank.rankName}"></option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="serveUnit">Serve unit:</label>
+    <select class="form-control" id="serveUnit" name="serveUnit">
+      <option th:each="option : ${units}" th:value="${option.unitId}" th:text="${option.unitId}"></option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="birthday">Birthday:</label>
+    <input class="form-control" id="birthday" name="birthday">
+  </div>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+</body>
+</html>
